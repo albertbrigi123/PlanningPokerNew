@@ -1,9 +1,12 @@
-package com.example.admin;
+package com.example.admin.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+
+import com.example.admin.Fragments.CreateGroup;
+import com.example.admin.R;
 
 public class MainActivity extends AppCompatActivity {
 

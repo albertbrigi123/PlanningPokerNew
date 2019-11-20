@@ -1,4 +1,4 @@
-package com.example.admin;
+package com.example.admin.Fragments;
 
 import android.content.Context;
 import android.net.Uri;

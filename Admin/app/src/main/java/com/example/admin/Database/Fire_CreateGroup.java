@@ -1,4 +1,4 @@
-package com.example.admin;
+package com.example.admin.Database;
 
 public class Fire_CreateGroup {
     private String name;
