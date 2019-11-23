@@ -1,4 +1,4 @@
-package com.example.admin;
+package com.example.admin.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,16 +7,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.example.admin.AddQuestionDialogListener;
-
-import java.util.Arrays;
+import com.example.admin.Interfaces.AddQuestionDialogListener;
+import com.example.admin.Models.QuestionItem;
+import com.example.admin.R;
 
 public class AddNewQuestionDialog extends AppCompatDialogFragment {
 
@@ -67,7 +66,7 @@ public class AddNewQuestionDialog extends AppCompatDialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 String question = editTextQuestion.getText().toString();
                 if (question.isEmpty() || question == null) {
-                    Toast addQuestion = Toast.makeText(getContext(), "Question cannot be blank", Toast.LENGTH_SHORT);
+                    Toast addQuestion = Toast.makeText(getContext(), "QuestionItem cannot be blank", Toast.LENGTH_SHORT);
                     addQuestion.show();
                     return;
                 }
@@ -88,7 +87,7 @@ public class AddNewQuestionDialog extends AppCompatDialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 String question = editTextQuestion.getText().toString();
                 if (question.isEmpty() || question == null) {
-                    Toast addQuestion = Toast.makeText(getContext(), "Question cannot be blank", Toast.LENGTH_SHORT);
+                    Toast addQuestion = Toast.makeText(getContext(), "QuestionItem cannot be blank", Toast.LENGTH_SHORT);
                     addQuestion.show();
                 }
 

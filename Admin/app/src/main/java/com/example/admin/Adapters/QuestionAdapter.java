@@ -1,4 +1,4 @@
-package com.example.admin;
+package com.example.admin.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.admin.Interfaces.OnItemClickListener;
+import com.example.admin.Models.QuestionItem;
+import com.example.admin.R;
 
 import java.util.ArrayList;
 
@@ -44,7 +48,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         QuestionItem currentItem = mQuestionList.get(position);
         holder.mQuestion.setText(currentItem.question);
-        holder.mDifficulty.setText(currentItem.difficulty);
     }
 
 

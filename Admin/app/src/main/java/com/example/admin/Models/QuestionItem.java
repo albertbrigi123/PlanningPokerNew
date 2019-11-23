@@ -1,15 +1,15 @@
 package com.example.admin.Models;
 
-public class Question {
-    private String question;
+public class QuestionItem {
+    public String question;
     private String groupKey;
 
-    public Question()
+    public QuestionItem()
     {
 
     }
 
-    public Question(String question, String groupKey) {
+    public QuestionItem(String question, String groupKey) {
         this.question = question;
         this.groupKey = groupKey;
     }
