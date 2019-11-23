@@ -5,11 +5,13 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.Database.Fire_CreateGroup;
@@ -34,10 +36,11 @@ public class CreateGroup extends Fragment {
         createGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkDataEntered()==true){
                 addForm();
                 FragmentTransaction fr=getFragmentManager().beginTransaction();
                 fr.replace(R.id.fragment_container,new AddQuestion());
-                fr.commit();
+                fr.commit();}
             }
         });
         return v;
@@ -53,5 +56,24 @@ public class CreateGroup extends Fragment {
         databaseReference.push().setValue(fm);
         Toast.makeText(getActivity(),"Insert to database",Toast.LENGTH_SHORT).show();
 
+    }
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+    boolean checkDataEntered() {
+        boolean isTrue=true;
+        if (isEmpty(name)) {
+            name.setError("Name is required!");
+            isTrue=false;
+        }
+
+        if (isEmpty(gname)) {
+            gname.setError("Group name is required!");
+            isTrue=false;
+        }
+
+        return isTrue;
     }
 }
