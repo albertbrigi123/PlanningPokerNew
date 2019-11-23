@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Admin</string>
+    <string name="MasterViewTitle">Create group</string>
+    <string name="GroupName">Group name</string>
+    <string name="CreateGroupButton">Create</string>
+    <string name="CancelGroupCreation">Cancel</string>
+    <string name="go_to_group_view">Go to group view</string>
 
+    <string-array name="Difficulty">
+        <item>XS,S,L,XL,XXL</item>
+        <item>1,2,3,4,5</item>
+        <item>1,20,30,50,70,80,100</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.admin.R;
 
 
 public class AddQuestion extends Fragment {
-
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.fragment_add_question,container,false);return v;}
 
 }
