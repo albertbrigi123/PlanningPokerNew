@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.admin.Interfaces.OnItemClickListener;
+import com.example.admin.Intefaces.OnItemClickListener;
 import com.example.admin.Models.QuestionItem;
 import com.example.admin.R;
 

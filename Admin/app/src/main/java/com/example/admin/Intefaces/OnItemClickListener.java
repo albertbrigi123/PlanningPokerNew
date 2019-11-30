@@ -1,4 +1,4 @@
-package com.example.admin.Interfaces;
+package com.example.admin.Intefaces;
 
 public interface OnItemClickListener {
     void onItemClick(int position);

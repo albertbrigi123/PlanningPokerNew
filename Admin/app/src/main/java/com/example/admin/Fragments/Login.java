@@ -1,5 +1,8 @@
 package com.example.admin.Fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,15 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.admin.Database.Fire_CreateGroup;
 import com.example.admin.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,36 +22,49 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class CreateGroup extends Fragment {
-    private EditText code;
-    private EditText gname;
-    private Button createGroupBtn;
-    private DatabaseReference db;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class Login extends Fragment {
+    public Button createGroupBtn;
+    public Button goToTheGroupBtn;
+    public boolean conSession;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference db = database.getReference().child("Groups");
+    private EditText gname,gcode;
+    public static final String TAG = "YOUR-TAG-NAME";
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_create_group,container,false);
-        code=v.findViewById(R.id.groupCode);
-        gname=v.findViewById(R.id.groupName);
+        View v = inflater.inflate(R.layout.fragment_login, container, false);
+        goToTheGroupBtn=v.findViewById(R.id.LoginButton);
         createGroupBtn=v.findViewById(R.id.createGroupButton);
+        gname=v.findViewById(R.id.groupName);
+        gcode=v.findViewById(R.id.groupCode);
         createGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                final String codeS=code.getText().toString();
+                FragmentTransaction fr=getFragmentManager().beginTransaction();
+                fr.replace(R.id.fragment_container,new CreateGroup());
+                fr.commit();}
+        });
+        goToTheGroupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String codeS=gcode.getText().toString();
                 final String gnameS=gname.getText().toString();
                 db= FirebaseDatabase.getInstance().getReference("groups");
                 db.child(codeS).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String value = dataSnapshot.getValue(String.class);
-                        if(dataSnapshot.exists()==true)
+                        if(dataSnapshot.exists()==false)
                         {
-                            Toast.makeText(getContext() , "Group exist!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext() , "Group is not exist!", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         else {
-                            addForm();
+
                             FragmentTransaction fr=getFragmentManager().beginTransaction();
                             fr.replace(R.id.fragment_container,new AddQuestion());
                             fr.commit();
@@ -64,24 +76,11 @@ public class CreateGroup extends Fragment {
 
                     }
                 });
-                }
-
+            }
         });
         return v;
     }
 
-    public void addForm()
-    {
-        code=getView().findViewById(R.id.groupCode);
-        String codeS=code.getText().toString();
-        gname=getView().findViewById(R.id.groupName);
-        String groupNameS=gname.getText().toString();
-        db = FirebaseDatabase.getInstance().getReference("groups");
-        Fire_CreateGroup group = new Fire_CreateGroup(codeS,groupNameS);
-        db.child(codeS).setValue(groupNameS);
-        Toast.makeText(getActivity(), "GROUP IS CREATED!", Toast.LENGTH_SHORT).show();
-
-    }
 
 
 

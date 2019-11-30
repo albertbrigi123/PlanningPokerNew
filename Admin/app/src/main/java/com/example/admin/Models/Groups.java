@@ -1,15 +1,15 @@
-package com.example.admin.Database;
+package com.example.admin.Models;
 
-public class Fire_CreateGroup {
+public class Groups {
     private String groupName;
     private String groupCode;
 
-    public Fire_CreateGroup()
+    public Groups()
     {
 
     }
 
-    public Fire_CreateGroup(String groupName, String groupCode) {
+    public Groups(String groupName, String groupCode) {
         this.groupName = groupName;
         this.groupCode = groupCode;
     }
