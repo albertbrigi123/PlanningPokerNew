@@ -66,7 +66,12 @@ public class Login extends Fragment {
                         else {
 
                             FragmentTransaction fr=getFragmentManager().beginTransaction();
-                            fr.replace(R.id.fragment_container,new AddQuestion());
+                            Fragment f=new AddQuestion();
+                            fr.addToBackStack(null);
+                            fr.replace(R.id.fragment_container,f);
+                            Bundle args=new Bundle();
+                            args.putString("groupCode",codeS);
+                            f.setArguments(args);
                             fr.commit();
                         }
                     }

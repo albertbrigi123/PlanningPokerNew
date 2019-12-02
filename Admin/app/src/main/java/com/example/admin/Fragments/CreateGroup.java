@@ -54,7 +54,12 @@ public class CreateGroup extends Fragment {
                         else {
                             addForm();
                             FragmentTransaction fr=getFragmentManager().beginTransaction();
-                            fr.replace(R.id.fragment_container,new AddQuestion());
+                            Fragment f=new AddQuestion();
+                            fr.addToBackStack(null);
+                            fr.replace(R.id.fragment_container,f);
+                            Bundle args=new Bundle();
+                            args.putString("groupCode",codeS);
+                            f.setArguments(args);
                             fr.commit();
                         }
                     }
@@ -64,7 +69,7 @@ public class CreateGroup extends Fragment {
 
                     }
                 });
-                }
+            }
 
         });
         return v;
