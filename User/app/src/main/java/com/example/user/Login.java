@@ -1,7 +1,6 @@
-package com.example.admin.Fragments;
+package com.example.user;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,48 +8,35 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.admin.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
 
 public class Login extends Fragment {
-    public Button createGroupBtn;
     public Button goToTheGroupBtn;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference db = database.getReference().child("Groups");
-    private EditText gname,gcode;
+    private EditText gcode,name;
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
         goToTheGroupBtn=v.findViewById(R.id.LoginButton);
-        createGroupBtn=v.findViewById(R.id.createGroupButton);
-        gname=v.findViewById(R.id.groupName);
         gcode=v.findViewById(R.id.groupCode);
-        createGroupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction fr=getFragmentManager().beginTransaction();
-                fr.replace(R.id.fragment_container,new CreateGroup());
-                fr.commit();}
-        });
+        name=v.findViewById(R.id.Name);
         goToTheGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String codeS=gcode.getText().toString();
-                final String gnameS=gname.getText().toString();
+                final String nameS=name.getText().toString();
                 db= FirebaseDatabase.getInstance().getReference("groups");
                 db.child(codeS).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -64,11 +50,12 @@ public class Login extends Fragment {
                         else {
 
                             FragmentTransaction fr=getFragmentManager().beginTransaction();
-                            Fragment f=new AddQuestion();
+                            Fragment f=new Vote();
                             fr.addToBackStack(null);
                             fr.replace(R.id.fragment_container,f);
                             Bundle args=new Bundle();
                             args.putString("groupCode",codeS);
+                            args.putString("name",nameS);
                             f.setArguments(args);
                             fr.commit();
                         }
@@ -83,8 +70,5 @@ public class Login extends Fragment {
         });
         return v;
     }
-
-
-
 
 }

@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddQuestion extends Fragment {
     private String groupId;
+    private RecyclerView recyclerView;
     private EditText question;
     private Switch status;
     private Button add, goToGroupBtn;
@@ -42,10 +44,12 @@ public class AddQuestion extends Fragment {
         question = v.findViewById(R.id.newQuestion);
         //status = v.findViewById(R.id.status_switch);
         add = v.findViewById(R.id.addButton);
+        recyclerView=v.findViewById(R.id.recyclerview_questions);
         goToGroupBtn = v.findViewById(R.id.GoToGroup);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(question.getText().toString().isEmpty()){
                     Toast.makeText(getActivity(), "Question textbox is empty!", Toast.LENGTH_SHORT).show();
                     return;
