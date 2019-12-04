@@ -46,6 +46,8 @@ public class Login extends Fragment {
                 fr.replace(R.id.fragment_container,new CreateGroup());
                 fr.commit();}
         });
+
+        //connect to group
         goToTheGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

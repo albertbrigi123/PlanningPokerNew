@@ -32,6 +32,7 @@ public class Login extends Fragment {
         goToTheGroupBtn=v.findViewById(R.id.LoginButton);
         gcode=v.findViewById(R.id.groupCode);
         name=v.findViewById(R.id.Name);
+        //connect to group
         goToTheGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

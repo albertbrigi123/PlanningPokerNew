@@ -41,6 +41,7 @@ public class CreateGroup extends Fragment {
 
                 final String codeS=code.getText().toString();
                 final String gnameS=gname.getText().toString();
+                //create a new group
                 db= FirebaseDatabase.getInstance().getReference("groups");
                 db.child(codeS).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -74,7 +75,7 @@ public class CreateGroup extends Fragment {
         });
         return v;
     }
-
+    //insert to database
     public void addForm()
     {
         code=getView().findViewById(R.id.groupCode);

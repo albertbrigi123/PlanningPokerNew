@@ -33,7 +33,7 @@ public class AddQuestion extends Fragment {
     private RecyclerView recyclerView;
     private EditText question;
     private Switch status;
-    private Button add, goToGroupBtn;
+    private Button add, showBtn;
     FirebaseDatabase db;
     DatabaseReference databaseReference;
 
@@ -44,8 +44,8 @@ public class AddQuestion extends Fragment {
         question = v.findViewById(R.id.newQuestion);
         //status = v.findViewById(R.id.status_switch);
         add = v.findViewById(R.id.addButton);
-        recyclerView=v.findViewById(R.id.recyclerview_questions);
-        goToGroupBtn = v.findViewById(R.id.GoToGroup);
+        //recyclerView=v.findViewById(R.id.recyclerview_questions);
+        showBtn = v.findViewById(R.id.ShowQuestions);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +58,19 @@ public class AddQuestion extends Fragment {
                 Toast.makeText(getActivity(), "Question is added!", Toast.LENGTH_SHORT).show();
                 }
         });
-
+        showBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fr=getFragmentManager().beginTransaction();
+                Fragment f=new ShowQuestions();
+                fr.addToBackStack(null);
+                fr.replace(R.id.fragment_container,f);
+                Bundle args=new Bundle();
+                args.putString("groupCode",groupId);
+                f.setArguments(args);
+                fr.commit();
+            }
+        });
 
         return v;
     }
