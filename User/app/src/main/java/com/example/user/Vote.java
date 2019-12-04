@@ -29,10 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 public class Vote extends Fragment {
     private Button SendBtn;
     private boolean check;
-    private TextView question;
+    private TextView questionTV;
     private boolean exists;
     private CardView a,b,c,d,e,f,g,h,i,lastchecked;
-    private String groupCodeS,uNameS;
+    private String groupCodeS,uNameS,question;
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference questionsReference = database.getReference().child("Questions");
     private static DatabaseReference answerReference = database.getReference().child("Answers");
@@ -41,7 +41,8 @@ public class Vote extends Fragment {
         View v = inflater.inflate(R.layout.fragment_vote, container, false);
         groupCodeS=getArguments().getString("groupCode");
         uNameS=getArguments().getString("name");
-        question=v.findViewById(R.id.Question);
+        questionTV=v.findViewById(R.id.Question);
+        getQuestion();
         a=v.findViewById(R.id.one);
         b=v.findViewById(R.id.two);
         c=v.findViewById(R.id.tree);
@@ -96,7 +97,7 @@ public class Vote extends Fragment {
                     }
                 });
 
-                
+
 
 
 
@@ -105,4 +106,29 @@ public class Vote extends Fragment {
 
 
     }
+    private void  getQuestion() {
+        questionsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot item: dataSnapshot.getChildren()){
+                    String txt = item.child("groupId").getValue().toString();
+
+                    if (txt.equals(groupCodeS)) {
+                        if (item.child("active").getValue().toString().equals("true")) {
+                            question = item.child("question").getValue().toString();
+
+                        }
+                    }
+
+
+                }
+                questionTV.setText(question);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });}
 }

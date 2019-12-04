@@ -51,6 +51,7 @@ public class Login extends Fragment {
         goToTheGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkDataEntered()==true){
                 final String codeS=gcode.getText().toString();
                 final String gnameS=gname.getText().toString();
                 db= FirebaseDatabase.getInstance().getReference("groups");
@@ -58,19 +59,17 @@ public class Login extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String value = dataSnapshot.getValue(String.class);
-                        if(dataSnapshot.exists()==false)
-                        {
-                            Toast.makeText(getContext() , "Group is not exist!", Toast.LENGTH_SHORT).show();
+                        if (dataSnapshot.exists() == false) {
+                            Toast.makeText(getContext(), "Group is not exist!", Toast.LENGTH_SHORT).show();
                             return;
-                        }
-                        else {
+                        } else {
 
-                            FragmentTransaction fr=getFragmentManager().beginTransaction();
-                            Fragment f=new AddQuestion();
+                            FragmentTransaction fr = getFragmentManager().beginTransaction();
+                            Fragment f = new AddQuestion();
                             fr.addToBackStack(null);
-                            fr.replace(R.id.fragment_container,f);
-                            Bundle args=new Bundle();
-                            args.putString("groupCode",codeS);
+                            fr.replace(R.id.fragment_container, f);
+                            Bundle args = new Bundle();
+                            args.putString("groupCode", codeS);
                             f.setArguments(args);
                             fr.commit();
                         }
@@ -80,13 +79,31 @@ public class Login extends Fragment {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });}
             }
         });
         return v;
     }
 
 
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
 
+
+    boolean checkDataEntered() {
+        boolean isTrue = true;
+        if (isEmpty(gcode)) {
+            gcode.setError("Group code is required!");
+            isTrue = false;
+        }
+
+        if (isEmpty(gname)) {
+            gname.setError("Group name is required!");
+            isTrue = false;
+        }
+        return isTrue;
+    }
 
 }

@@ -42,7 +42,7 @@ public class AddQuestion extends Fragment {
         groupId = getArguments().getString("groupCode");
         //Log.d("FFFF",groupId);
         question = v.findViewById(R.id.newQuestion);
-        //status = v.findViewById(R.id.status_switch);
+        status = v.findViewById(R.id.status_switch);
         add = v.findViewById(R.id.addButton);
         //recyclerView=v.findViewById(R.id.recyclerview_questions);
         showBtn = v.findViewById(R.id.ShowQuestions);
@@ -74,7 +74,7 @@ public class AddQuestion extends Fragment {
 
         return v;
     }
-
+    //insert question to database
     public void addQuestion()
     {
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions");

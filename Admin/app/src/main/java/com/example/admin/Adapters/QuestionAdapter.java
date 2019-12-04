@@ -11,10 +11,10 @@ import android.R;
 import com.example.admin.Database.Fire_Question;
 
 import java.util.List;
-/*
-public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder>
+
+/*public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder>
 {
-    private Object Context;
+    /*private Object Context;
     private List<Fire_Question> questionList;
 
     public QuestionAdapter(Object context, List<Fire_Question> questionList) {
@@ -26,8 +26,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from((android.content.Context) Context);
-        View v;
-        //v = inflater.inflate(R.layout.question_item,null);
+        View v = inflater.inflate(R.layout.question_item,null);
         return new ViewHolder(v);
     }
 

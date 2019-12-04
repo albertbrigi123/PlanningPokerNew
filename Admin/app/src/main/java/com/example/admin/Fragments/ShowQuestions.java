@@ -15,7 +15,7 @@ import com.example.admin.R;
 
 public class ShowQuestions extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_add_question, container, false);
+        View v = inflater.inflate(R.layout.fragment_show_questions, container, false);
         return v;
     }
 }

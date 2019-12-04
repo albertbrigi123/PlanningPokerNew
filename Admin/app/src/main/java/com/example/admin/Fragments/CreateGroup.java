@@ -75,7 +75,7 @@ public class CreateGroup extends Fragment {
         });
         return v;
     }
-    //insert to database
+    //insert group to database
     public void addForm()
     {
         code=getView().findViewById(R.id.groupCode);
