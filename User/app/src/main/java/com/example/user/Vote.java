@@ -42,7 +42,7 @@ public class Vote extends Fragment {
         groupCodeS=getArguments().getString("groupCode");
         uNameS=getArguments().getString("name");
         questionTV=v.findViewById(R.id.Question);
-        getQuestion();
+        //getQuestion();
         a=v.findViewById(R.id.one);
         b=v.findViewById(R.id.two);
         c=v.findViewById(R.id.tree);

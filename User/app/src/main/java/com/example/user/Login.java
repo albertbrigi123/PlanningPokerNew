@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class Login extends Fragment {
         goToTheGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkDataEntered()==true){
                 final String codeS=gcode.getText().toString();
                 final String nameS=name.getText().toString();
                 db= FirebaseDatabase.getInstance().getReference("groups");
@@ -67,9 +69,29 @@ public class Login extends Fragment {
 
                     }
                 });
-            }
+            }}
         });
         return v;
+    }
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+
+    boolean checkDataEntered() {
+        boolean isTrue = true;
+        if (isEmpty(gcode)) {
+            gcode.setError("Name is required!");
+            isTrue = false;
+        }
+
+        if (isEmpty(name)) {
+            name.setError("Group name is required!");
+            isTrue = false;
+        }
+        return isTrue;
     }
 
 }
